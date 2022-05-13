@@ -1,0 +1,43 @@
+import pandas as pd
+import numpy as np
+
+# Create dataframe
+df = pd.DataFrame({
+    "name": ["Anna", "Dane", "David", "Kevin", "Joe", "Rose"],
+    "weight": [45.2,50.5,62.1,64.0,59.0,np.nan],
+    "height": [155, 160, 162, 170, 167,159],
+    "birth_year":[2000,1997,1996,1987,1998,2003],
+    "gender":["female", "male", "male", "male", "male", "female"],
+    "city":["New York", "Chicago", "Austin", "New York",np.nan,"New York"]
+    })
+
+# Dataframe info
+df.info()
+
+# Basic statistics information
+df.describe()
+
+# Reorder the columns to ('name','birth_year','height','weight','city','gender')
+df = df[['name','birth_year','height','weight','city','gender']]
+
+# Print all row men that born after the year 1996 or Women with height > 157
+df[((df['gender'] == 'male') & (df['birth_year']>1996)) | ((df['gender'] == 'female') & (df['height']>157))]
+
+# Fill NaN of weight with mean of the gender and fill NaN of city with mode
+df.isnull().sum()
+df['weight'] = df['weight'].fillna((df['weight']).head(1).mean())   #NaN of weight with mean of the female
+df['city'] = df['city'].fillna((df['city']).mode()[0])    #fill NaN of city with mode
+
+# Z-score for check outliers
+import scipy.stats as stats
+df[(np.abs(stats.zscore(df["weight"])) >= 3)] #there is no outliers in weight's column
+
+# IQR for check outliers
+q1 = df["weight"].quantile(0.25)
+q3 = df["weight"].quantile(0.75)
+
+iqr = q3-q1 #Interquartile range
+fence_low  = q1-1.5*iqr
+fence_high = q3+1.5*iqr
+
+df.loc[(df["weight"] < fence_low) | (df["weight"] > fence_high)] #there is no outliers in weight's column
