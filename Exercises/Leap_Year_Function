@@ -1,0 +1,14 @@
+#function to input the year
+def input_leap_year(x): 
+    return x
+
+#function to calculate the right leap year
+def true_leap_year(x): 
+    return(int(4-(float(x)%4)+float(x)))
+
+#function to check if the input is a leap year or not, if the input is not a leap year it will be printed the next leap year after the year's input.
+def leap_year(x):
+    if float(x)%4 == 0:
+        print('Year', input_leap_year(x), 'is a leap year.')
+    else:
+        print('Year', input_leap_year(x), 'is not a leap year. The next leap year after', input_leap_year(x), 'is' , true_leap_year(x))
