@@ -6,15 +6,8 @@
 
 # #### 1) Create the following Pandas DataFrame
 
-# In[100]:
-
-
 import pandas as pd
 import numpy as np
-
-
-# In[122]:
-
 
 # Create dataframe
 df1 = pd.DataFrame({
@@ -25,50 +18,29 @@ df1 = pd.DataFrame({
     "gender":["female", "male", "male", "male", "male", "female"],
     "city":["New York", "Chicago", "Austin", "New York",np.nan,"New York"]
     })
-df1
 
 
 # #### 2) Create another Pandas DataFrame as the following and merge it with the previous DataFrame (key=name and nick name). Make sure that no rows are missing from the original DataFrame
-
-# In[123]:
-
-
 #create another dataframe
 df2 = pd.DataFrame({
     'nick_name':['Anna','David','Dane','Rose'],
     'full_name':['Anna Levis', 'David John','Dane Sebastian', 'Rose Kimberly']
     })
-df2
 
 
 # #### 3) Drop nick_name column and fill null values in the full_name from the merged DataFrame with their original name column.
-
-# In[124]:
-
-
 # merged df2 into df1 and drop nick_name column
 df3 = df1.merge(df2, how = 'left', left_on = 'name', right_on = 'nick_name').drop(columns = 'nick_name')
 df3 = df3[['name','full_name','weight','height','birth_year','gender','city']]
 df3
 
 
-# #### Create a new ‘bmi’ column calculated based on the following formula
-#          BMI (kg/m^2) = weight / (height/100)^2
-# 
-
-# In[125]:
-
-
-# create bmi column with the function BMI (kg/m^2) = weight / (height/100)^2
+# #### 4) Create a new ‘bmi’ column calculated based on the following formula
+#                   BMI (kg/m^2) = weight / (height/100)^2
 df3['bmi'] = (df3['weight']/(df3['height']/100)**2)
-df3
 
 
 # #### 5) Create a new ‘bmi_class’ column following the definition in the table below.
-
-# In[126]:
-
-
 #create function of bmi_class
 def bmi_class (bmi):
     if bmi<18.5:
@@ -84,21 +56,11 @@ def bmi_class (bmi):
     elif (bmi>=40):
         return 'Obesity Class 3'
 
-
-# In[127]:
-
-
 #put the function before and create new column of df3 called bmi_class
 df3['bmi_class'] = df3.apply(lambda x: bmi_class(x['bmi']), axis = 1)
 
-
-# In[128]:
-
-
 df3
 
-
-# In[ ]:
 
 
 
