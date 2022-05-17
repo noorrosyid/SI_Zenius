@@ -31,14 +31,6 @@ def leap_year(x):
         print('Year', input_leap_year(x), 'is not a leap year. The next leap year after', input_leap_year(x), 'is' , true_leap_year(x))
 
 
-# In[4]:
-
-
-leap_year(2001)
-
-
-# In[ ]:
-
 
 
 
