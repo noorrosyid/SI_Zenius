@@ -1,21 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ### Assignment
-
-# In[150]:
-
-
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
 import datetime
 
-
-# In[151]:
-
-
+#import data
 df = pd.read_csv('C:/Users/rosyi/Videos/Machine Learning/Day 7. Data Visualization in Python I/telco_customer_churn.csv')
 df2 = pd.read_csv('C:/Users/rosyi/Videos/Machine Learning/Day 7. Data Visualization in Python I/apartment_data.csv')
 
@@ -53,16 +45,8 @@ df3 = df3.dropna().reset_index(drop = True)
 # ### Jawaban:
 
 # ##### Nomor 1a
-
-# In[166]:
-
-
 # See five data in every column
 df.head()
-
-
-# In[153]:
-
 
 # Create figure and axes
 fig = plt.figure()
@@ -75,10 +59,6 @@ plt.show()
 
 
 # ##### Nomor 1b:
-
-# In[154]:
-
-
 # Create crosstab for ratio comparison
 pd.crosstab(df['InternetService'], df['Churn']).apply(lambda x: x*100/x.sum())
 
@@ -90,17 +70,10 @@ plt.show()
 # ##### Nomor 1c:
 # Bagi customer yang Churn, paling banyak mereka menggunakan internet **Fiber Optic**.
 
+
 # #### Nomor 2a:
-
-# In[106]:
-
-
 # Knowing how many bathrooms are offered from each apartment and the amount of data.
 df2.groupby('Bathroom').size()
-
-
-# In[108]:
-
 
 # Make a barplot to find out the average of AnnualPrice for an apartment that has 0, 1, 2, 3 Bathroom
 df2.groupby('Bathroom').agg({'AnnualPrice':'mean'}).plot(kind = 'bar', color = 'green')
@@ -110,24 +83,13 @@ plt.show()
 # ##### Nomor 2b:
 # Unit Apartment dengan **3** Kamar Mandi memiliki rata-rata Annual Price paling tinggi. 
 
+
 # ##### Nomor 3a:
-
-# In[119]:
-
-
 # See five data in every column
 df3.head()
 
-
-# In[124]:
-
-
 # find out how many islands are in the data along with their names.
 df3.groupby('island').size()
-
-
-# In[164]:
-
 
 from matplotlib.lines import Line2D
 
